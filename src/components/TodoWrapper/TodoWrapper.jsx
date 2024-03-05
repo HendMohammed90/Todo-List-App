@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "./TodoWrapper.css"
+import TodoForm from "../TodoForm/TodoForm"
 
 const TodoWrapper = () => {
     const initialTodos = ['Buy groceries', 'Do laundry', 'Study for exam', 'Call mom'];
@@ -18,14 +19,15 @@ const TodoWrapper = () => {
         }
 
     };
+
+    const ChangeTodoState = (e)=>{
+        setTodoState(e.target.value)
+    }
     
   return (
     <section className='TodoWrapper'>
         <h1>Welcome To Your Todo List</h1>
-        <form onSubmit={AddToList}>
-            <input type='text' name='todo' value={todoState} placeholder="Enter a task" onChange={(e)=> setTodoState(e.target.value)}/>
-            <button type='submit'>Add Task</button>
-        </form>
+        <TodoForm onSubmitTodo={AddToList} todoValue={todoState} onChangeTodo={ChangeTodoState} />
         <ul>
         {Todos.map((data)=>{
             return (<li key={data}>{data}</li>)
